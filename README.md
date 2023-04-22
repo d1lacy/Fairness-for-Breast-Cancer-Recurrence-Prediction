@@ -13,8 +13,11 @@ In `dataProcessing.ipynb`, I process the data to be used in the Seldonian Toolki
 
 ## Formulate the Seldonian ML problem
 I use two definitions of fairness for my application of the Seldonian Algorithm. Overall accuracy equality ensures that the prediction accuracy is similar for pre and post menopausal patients. Equalized odds ensures that the false negative rate (rate of predicting no recurrence when there will be one) is similar between both groups. Here are their formal definitions:
-1. Overall accuracy equality: $\min((\mathrm{ACC} | [\mathrm{premenopause}])/(\mathrm{ACC} | [\mathrm{menopause}]),(\mathrm{ACC} | [\mathrm{menopause}])/(\mathrm{ACC} | [\mathrm{premenopause}])) \geq (1-\epsilon)$
-2. Equalized odds: $\min((\mathrm{FNR} | [\mathrm{premenopause}])/(\mathrm{FNR} | [\mathrm{menopause}]),(\mathrm{FNR} | [\mathrm{menopause}])/(\mathrm{FNR} | [\mathrm{premenopause}])) \geq (1-\epsilon)$
+1. Overall accuracy equality: 
+$\min((\mathrm{ACC} | [\mathrm{premenopause}])/(\mathrm{ACC} | [\mathrm{menopause}]),(\mathrm{ACC} | [\mathrm{menopause}])/(\mathrm{ACC} | [\mathrm{premenopause}])) \geq (1-\epsilon)$
+
+2. Equalized odds: 
+$\min((\mathrm{FNR} | [\mathrm{premenopause}])/(\mathrm{FNR} | [\mathrm{menopause}]),(\mathrm{FNR} | [\mathrm{menopause}])/(\mathrm{FNR} | [\mathrm{premenopause}])) \geq (1-\epsilon)$
 
 I use 0.2, 0.1, 0.05 as $\epsilon$ values which mean ACC or FNR must be within 20%, 10% and 5% for both groups. I set $\delta = 0.05$ for all 6 combinations of the 2 fairness definitions and 3 values of $\epsilon$.
 
@@ -42,7 +45,7 @@ Note: you can also run `generateOnePlot.py` to take input for a fairness definit
 ## Discussion
 With overall accuracy equality as the fairness constraint and accross all epsilon values, the qsa is less accurate than the logistic regression baseline but more accurate than the random classifier. The qsa also never violates the fairness constraint, while the logistic regression baseline clearly violates the fairness constraint for $\epsilon$ = 0.1, and 0.05. The logistic regression likely makes a prediction of recurrence with some bias for menopausal status resulting in different accuracies which is an unwanted behavior. The qsa is always fair. The qsa takes more data to find a solution, but has access to only a small amount of data (286 rows). It is clearly improving in accuracy before it runs out of data. With more data the qsa could be much more accurate but still fair.
 
-With the equal opporunity fairness constraint, the results are similar. The qsa is always fair but requires more data to find a solution. Once it finds a solution with fairness for equal opportunity (at around 100 rows of data), the accuracy is actually very similar the logistic regression. The logistic regression violates the fairness constraint for all values of epsilon. For either pre-menopausal or post-menopausal patients, it would unfairly have a higher rate of false negative predictions meaning it would under predict recurrence events. This behaviour could lead to patients of one of those groups being underprepared for recurrence.
+With the equal opportunity fairness constraint, the results are similar. The qsa is always fair but requires more data to find a solution. Once it finds a solution with fairness for equal opportunity (at around 100 rows of data), the accuracy is actually very similar the logistic regression. The logistic regression violates the fairness constraint for all values of epsilon. For either pre-menopausal or post-menopausal patients, it would unfairly have a higher rate of false negative predictions meaning it would under predict recurrence events. This behaviour could lead to patients of one of those groups being underprepared for recurrence.
 
 ## Summary
 The seldonian algorithm seems very promising in this application. A normal logistic regression behaves in unfair ways by predicting recurrence with different accuracies, or with different false negative rates for pre-menopausal or post-menopausal patients. The qsa is always fair and can be nearly as accurate, especially with more data to train on.  

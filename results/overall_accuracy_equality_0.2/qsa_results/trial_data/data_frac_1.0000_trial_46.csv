@@ -1,0 +1,2 @@
+data_frac,trial_i,performance,passed_safety,failed
+1.0,46,0.5866149928016543,True,False

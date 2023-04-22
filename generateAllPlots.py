@@ -25,7 +25,7 @@ for constraint_name in constraint_names:
         os.makedirs(results_dir, exist_ok=True)
         images_dir = f'images/'
         os.makedirs(images_dir, exist_ok=True)
-        plot_savename = os.path.join(images_dir, f'{constraint_name}_{epsilon}.pdf')
+        plot_savename = os.path.join(images_dir, f'{constraint_name}_{epsilon}.png')
 
         dataset = spec.dataset
         test_features = dataset.features
@@ -66,5 +66,5 @@ for constraint_name in constraint_names:
 
         plot_generator.make_plots(fontsize=12,legend_fontsize=8,
             performance_label=performance_metric,
-            #performance_yscale='log',
+            save_format='png',
             savename=plot_savename)

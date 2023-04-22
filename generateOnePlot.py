@@ -13,7 +13,7 @@ while constraint_name not in ["overall_accuracy_equality", "equal_opportunity"]:
 
 epsilon = -1
 while epsilon not in [0.2, 0.1, 0.05]:
-    epsilon = float(input("\nEnter an epsilon value\n(0.2, 0.1, 0.05 for fairness cosntraints or 0.4, 0.3, 0.2 for safety): "))
+    epsilon = float(input("\nEnter an epsilon value\n(0.2, 0.1, 0.05): "))
 
 
 
@@ -29,7 +29,7 @@ results_dir = f'results/{constraint_name}_{epsilon}'
 os.makedirs(results_dir, exist_ok=True)
 images_dir = f'images/'
 os.makedirs(images_dir, exist_ok=True)
-plot_savename = os.path.join(images_dir, f'{constraint_name}_{epsilon}.pdf')
+plot_savename = os.path.join(images_dir, f'{constraint_name}_{epsilon}.png')
 
 dataset = spec.dataset
 test_features = dataset.features
@@ -68,7 +68,8 @@ plot_generator.run_baseline_experiment(
 
 plot_generator.run_seldonian_experiment(verbose=verbose)
 
-plot_generator.make_plots(fontsize=12,legend_fontsize=8,
-    performance_label=performance_metric,
-    #performance_yscale='log',
-    savename=plot_savename)
+plot_generator.make_plots(fontsize=12,legend_fontsize=8, 
+                            performance_label=performance_metric,
+                            save_format='png',
+                            savename=plot_savename,
+    )

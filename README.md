@@ -25,11 +25,11 @@ I use 0.2, 0.1, 0.05 as $\epsilon$ values which mean ACC or FNR must be within 2
 In `createSpecs.py`, I create 6 spec objects, each for a different combination of a fairness definition with a value for $\epsilon$. The spec objects are saved in `./specs/`.
 
 ## Running a Seldonian Experiment
-In `generateAllPlots.py`, I run 6 experiments for the 6 spec objects. Each experiment uses a quasi_Seldonian model "qsa" representing one of the 2 fairness definitions with one of the 3 epsilon values. In each experiment, the qsa is compared to a baseline regression model and a random classifier. The models are compared on accuracy, probability of solution, and probability constraint was violated based on different amounts of training data. Each model is compared on 15 different amounts of training data each with 50 trials. 
+In `generateAllPlots.py`, I run 6 experiments for the 6 spec objects. Each experiment uses a quasi-Seldonian model "qsa" representing one of the 2 fairness definitions with one of the 3 epsilon values. In each experiment, the qsa is compared to a baseline regression model and a random classifier. The models are compared on accuracy, probability of solution, and probability constraint was violated based on different amounts of training data. Each model is compared on 15 different amounts of training data each with 50 trials. 
 
-This program saves results and resampled data frames for each experiment in `results/` ands it saves the following plots in `images/`:
+This program saves results and resampled data frames for each experiment in `results/` and saves the following plots to `images/`:
 
-Note: you can also run `generateOnePlot.py` to take input for a fairness definition and an epsilon value to run a single experiment
+<em>Note: you can also run `generateOnePlot.py` to take input for a fairness definition and an epsilon value to run a single experiment</em>
 
 #### Experiment results for overall accuracy equality fairness with $\epsilon$ = 0.2, 0.1, 0.05:
 ![overall_accuracy_equality_0.2](images/overall_accuracy_equality_0.2.png)
